@@ -1,5 +1,5 @@
 # ClassicCipher
-This is simple Android application to ciphering or deciphering text using Classic Cipher.
+This is simple Android application for ciphering or deciphering text using Classic Cipher.
 
 The allowable key for this cipher is any arbritary integer, divided by 26, and the remainder is the useful key.
 
