@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutMe">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
+            android:contentDescription="@string/julius_caesar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/caesar" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
+            android:layout_marginBottom="10pt"
+            android:gravity="center"
+            android:text="@string/description1"
+            android:textSize="22sp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
+            android:layout_marginBottom="10pt"
+            android:contentDescription="@string/disk"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:src="@drawable/disk" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
+            android:layout_marginBottom="10pt"
+            android:gravity="center"
+            android:text="@string/description2"
+            android:textSize="22sp" />
+    </LinearLayout>
+</ScrollView>

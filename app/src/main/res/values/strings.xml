@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ClassicCipher</string>
+    <string name="title_key">Insert Key!</string>
+    <string name="title_input">Insert Text to Encode/Decode:</string>
+    <string name="encode">Encode</string>
+    <string name="decode">Decode</string>
+    <string name="title_output">Encoded/Decoded Text:</string>
+    <string name="clear">Clear</string>
+    <string name="about">About</string>
+    <string name="julius_caesar">Julius Caesar</string>
+    <string name="description1">The Caesar cipher is named for Julius Caesar, who used an alphabet where decrypting would shift three letters to the left.\n(Image by: H. F. Helmolt)</string>
+    <string name="disk">Cipher Disk</string>
+    <string name="description2">A construction of two rotating disks with a Caesar cipher can be used to encrypt or decrypt the code. (Image by: Hubert Berberich)\n\nSource: Wikipedia</string>
+
+</resources>
