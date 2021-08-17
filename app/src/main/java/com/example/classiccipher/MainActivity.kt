@@ -1,5 +1,8 @@
 package com.example.classiccipher
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,6 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var clearButton: Button
     private lateinit var decodeButton: Button
     private lateinit var outputText: TextView
+    private lateinit var copyButton: Button
 
     companion object {
         private const val STATE_RESULT = "state_result"
@@ -65,10 +70,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         clearButton = findViewById(R.id.clearButton)
         decodeButton = findViewById(R.id.decodeButton)
         outputText = findViewById(R.id.outputText)
+        copyButton = findViewById(R.id.copyButton)
 
         encodeButton.setOnClickListener(this)
         clearButton.setOnClickListener(this)
         decodeButton.setOnClickListener(this)
+        copyButton.setOnClickListener(this)
 
         if (savedInstanceState != null) {
             val result = savedInstanceState.getString(STATE_RESULT)
@@ -85,6 +92,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val key = inputKey.text.toString().trim()
         val input = inputText.text.toString().trim().lowercase()
+        val output = outputText.text.toString()
 
         if (v?.id == R.id.encodeButton) {
 
@@ -130,6 +138,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val keyNumber = key.toInt() % 26
                 outputText.text = translate(keyNumber, input, "decode")
             }
+        }
+
+        if (v?.id == R.id.copyButton) {
+            val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("text", output)
+
+            clipboardManager.setPrimaryClip(clipData)
+
+            Toast.makeText(this, "Text is successfully copied!", Toast.LENGTH_LONG).show()
         }
     }
 
