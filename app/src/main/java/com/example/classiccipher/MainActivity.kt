@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "u" to 20, "v" to 21, "w" to 22, "x" to 23, "y" to 24,
             "z" to 25, " " to 26
         )
-        val temp = input.chunked(1) { x: CharSequence -> stringMap[x.toString()] ?: error("") }
-            .toMutableList()
         val numberMap = listOf(
             "a", "b", "c", "d", "e",
             "f", "g", "h", "i", "j",
@@ -49,15 +47,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         )
         val output = input.toCharArray()
 
-        if (mode == "encode") {
-            for (index in temp.indices) if (temp[index] != 26) temp[index] = (temp[index] + key) % 26
-        } else {
-            for (index in temp.indices) if (temp[index] != 26) temp[index] = (temp[index] + 26 - key) % 26
+        return try {
+            val temp = input.chunked(1) { x: CharSequence -> stringMap[x.toString()] ?: error("") }
+                .toMutableList()
+
+            if (mode == "encode") {
+                for (index in temp.indices) if (temp[index] != 26) temp[index] = (temp[index] + key) % 26
+            } else {
+                for (index in temp.indices) if (temp[index] != 26) temp[index] = (temp[index] + 26 - key) % 26
+            }
+
+            for (index in output.indices) output[index] = numberMap[temp[index]].single()
+
+            String(output)
+        } catch (e: Exception) {
+            "ERROR!\nInput text cannot contain any characters other than English alphabet!"
         }
-
-        for (index in output.indices) output[index] = numberMap[temp[index]].single()
-
-        return String(output)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
