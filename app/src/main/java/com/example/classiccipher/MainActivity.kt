@@ -9,20 +9,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import com.example.classiccipher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var inputKey: EditText
-    private lateinit var inputText: EditText
-    private lateinit var encodeButton: Button
-    private lateinit var clearButton: Button
-    private lateinit var decodeButton: Button
-    private lateinit var outputText: TextView
-    private lateinit var copyButton: Button
+    private lateinit var binding: ActivityMainBinding
 
     companion object {
         private const val STATE_RESULT = "state_result"
@@ -67,37 +58,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        inputKey = findViewById(R.id.inputKey)
-        inputText = findViewById(R.id.inputText)
-        encodeButton = findViewById(R.id.encodeButton)
-        clearButton = findViewById(R.id.clearButton)
-        decodeButton = findViewById(R.id.decodeButton)
-        outputText = findViewById(R.id.outputText)
-        copyButton = findViewById(R.id.copyButton)
-
-        encodeButton.setOnClickListener(this)
-        clearButton.setOnClickListener(this)
-        decodeButton.setOnClickListener(this)
-        copyButton.setOnClickListener(this)
+        binding.encodeButton.setOnClickListener(this)
+        binding.clearButton.setOnClickListener(this)
+        binding.decodeButton.setOnClickListener(this)
+        binding.copyButton.setOnClickListener(this)
 
         if (savedInstanceState != null) {
             val result = savedInstanceState.getString(STATE_RESULT)
-            outputText.text = result
+            binding.outputText.text = result
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(STATE_RESULT, outputText.text.toString())
+        outState.putString(STATE_RESULT, binding.outputText.text.toString())
     }
 
     override fun onClick(v: View?) {
 
-        val key = inputKey.text.toString().trim()
-        val input = inputText.text.toString().trim().lowercase()
-        val output = outputText.text.toString()
+        val key = binding.inputKey.text.toString().trim()
+        val input = binding.inputText.text.toString().trim().lowercase()
+        val output = binding.outputText.text.toString()
 
         if (v?.id == R.id.encodeButton) {
 
@@ -105,24 +89,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             if (key.isEmpty()) {
                 isEmptyFields = true
-                inputKey.error = "Please insert a key!"
+                binding.inputKey.error = "Please insert a key!"
             }
 
             if (input.isEmpty()) {
                 isEmptyFields = true
-                inputText.error = "Please insert some text!"
+                binding.inputText.error = "Please insert some text!"
             }
 
             if (!isEmptyFields) {
                 val keyNumber = key.toInt() % 26
-                outputText.text = translate(keyNumber, input, "encode")
+                binding.outputText.text = translate(keyNumber, input, "encode")
             }
         }
 
         if (v?.id == R.id.clearButton) {
-            inputKey.setText("")
-            inputText.setText("")
-            outputText.text = ""
+            binding.inputKey.setText("")
+            binding.inputText.setText("")
+            binding.outputText.text = ""
         }
 
         if (v?.id == R.id.decodeButton) {
@@ -131,17 +115,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             if (key.isEmpty()) {
                 isEmptyFields = true
-                inputKey.error = "Please insert a key!"
+                binding.inputKey.error = "Please insert a key!"
             }
 
             if (input.isEmpty()) {
                 isEmptyFields = true
-                inputText.error = "Please insert some text!"
+                binding.inputText.error = "Please insert some text!"
             }
 
             if (!isEmptyFields) {
                 val keyNumber = key.toInt() % 26
-                outputText.text = translate(keyNumber, input, "decode")
+                binding.outputText.text = translate(keyNumber, input, "decode")
             }
         }
 
